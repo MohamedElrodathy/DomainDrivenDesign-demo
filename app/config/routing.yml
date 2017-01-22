@@ -1,3 +1,7 @@
-app:
-    resource: "@AppBundle/Controller/"
-    type:     annotation
+checkout_app:
+    resource: "@CheckoutAppBundle/Resources/config/routing.yml"
+    prefix:   /checkout/
+
+product_app:
+    resource: "@ProductAppBundle/Resources/config/routing.yml"
+    prefix:   /

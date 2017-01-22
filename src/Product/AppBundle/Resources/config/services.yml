@@ -1,0 +1,4 @@
+services:
+#    product_app.example:
+#        class: Product\AppBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
