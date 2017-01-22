@@ -3,7 +3,6 @@
 # Exit immediately if a command exits with a non-zero status.
 set -e
 
-CURRENT_USER_DIR="$(pwd)"
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 PROJECT_DIR="$( cd "$( dirname "${SCRIPT_DIR}" )" && pwd )"
 
@@ -15,17 +14,12 @@ cd "${PROJECT_DIR}"
 [ ! -f .env ] && cp .env.dist .env
 
 docker-compose build
-docker-compose up -d
-
-sleep 2
+docker-compose up -d && sleep 2
 
 cd - &>/dev/null
 cd "${SCRIPT_DIR}"
 
-# composer always returns 129
-set +e
-./composer.sh install
-set -e
-./browser.sh
+./composer install
+./open-in-browser && sleep 2
 
 cd - &>/dev/null
