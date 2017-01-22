@@ -17,5 +17,8 @@
 /vendor/
 /web/bundles/
 
+# library specific
+/.php_cs
+
 # project specific
 /.env
