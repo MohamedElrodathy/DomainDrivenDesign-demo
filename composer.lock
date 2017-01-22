@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "84a65c9d4c04e68d4d7e33b30ab37dfd",
+    "content-hash": "0f5100c2c5016e7a28d5e2b306356fc3",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1444,6 +1444,63 @@
             "time": "2016-12-29T10:02:40+00:00"
         },
         {
+            "name": "symfony/dotenv",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/dotenv.git",
+                "reference": "97e1c1fb1b2eb9c647de2b2e78dd5701c823007b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/dotenv/zipball/97e1c1fb1b2eb9c647de2b2e78dd5701c823007b",
+                "reference": "97e1c1fb1b2eb9c647de2b2e78dd5701c823007b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.9"
+            },
+            "require-dev": {
+                "symfony/process": "^3.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.3-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Dotenv\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Registers environment variables from a .env file",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "dotenv",
+                "env",
+                "environment"
+            ],
+            "time": "2017-01-12 16:39:44"
+        },
+        {
             "name": "symfony/monolog-bundle",
             "version": "v3.0.3",
             "source": {
@@ -2219,12 +2276,15 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "roave/security-advisories": 20
+        "roave/security-advisories": 20,
+        "symfony/dotenv": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.5.9"
+        "php": ">=7.1",
+        "ext-pdo": "*",
+        "ext-pdo_mysql": "*"
     },
     "platform-dev": []
 }

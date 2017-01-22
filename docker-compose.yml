@@ -1,0 +1,38 @@
+version: '2'
+
+services:
+    db:
+        image: mysql
+        ports:
+            - 3306
+        volumes:
+            - "./var/mysqldata:/var/lib/mysql"
+        environment:
+            MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
+            MYSQL_DATABASE: ${DATABASE_NAME}
+            MYSQL_USER: ${DATABASE_USER}
+            MYSQL_PASSWORD: ${DATABASE_PASSWORD}
+
+    php:
+        build: ./provisionning/php7-fpm
+        ports:
+            - 9000
+        depends_on:
+            - db
+        links:
+            - db
+        volumes:
+            - "./:/var/www/myapp"
+            - "./var/logs:/var/www/myapp/var/logs"
+
+    nginx:
+        build: ./provisionning/nginx
+        ports:
+            - 80
+        links:
+            - db
+            - php
+        volumes_from:
+            - php
+        volumes:
+            - "./var/logs/nginx/:/var/log/nginx"
