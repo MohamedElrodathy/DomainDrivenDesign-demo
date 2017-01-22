@@ -37,7 +37,8 @@ RUN echo "Check install" \
     && "date" \
     && composer --version
 
-RUN sed -ri 's/^www-data:x:33:33:/www-data:x:1000:1000:/' /etc/passwd
+RUN sed -ri 's/^www-data:x:33:33:/www-data:x:1000:1000:/' /etc/passwd \
+    && chown -R 1000:1000 /var/www
 
 USER www-data
 
