@@ -4,13 +4,9 @@
 set -e
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-PROJECT_DIR="$( cd "$( dirname "${SCRIPT_DIR}" )" && pwd )"
 
-# Print commands and their arguments as they are executed.
-set -x
+. ${SCRIPT_DIR}/inc/all.sh
 
-cd "${PROJECT_DIR}"
+cd_project_root
 
-docker-compose down
-
-cd - # will keep history
+container_down 1

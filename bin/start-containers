@@ -4,22 +4,13 @@
 set -e
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-PROJECT_DIR="$( cd "$( dirname "${SCRIPT_DIR}" )" && pwd )"
 
-# Print commands and their arguments as they are executed.
-set -x
+. ${SCRIPT_DIR}/inc/all.sh
 
-cd "${PROJECT_DIR}"
+cd_project_root
 
-[ ! -f .env ] && cp .env.dist .env
+[ ! -f .env ] && (set -x; cp .env.dist .env)
+container_up 1
 
-docker-compose build
-docker-compose up -d && sleep 2
-
-cd - &>/dev/null
-cd "${SCRIPT_DIR}"
-
-./composer install
-./open-in-browser && sleep 2
-
-cd - &>/dev/null
+${SCRIPT_DIR}/composer install
+${SCRIPT_DIR}/open-in-browser && sleep 1

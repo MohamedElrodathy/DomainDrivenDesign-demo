@@ -1,19 +1,14 @@
 #!/usr/bin/env bash
 
-# Wrapper for the composer command line tool.
-
-
 # Exit immediately if a command exits with a non-zero status.
 set -e
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-PROJECT_DIR="$( cd "$( dirname "${SCRIPT_DIR}" )" && pwd )"
 
-cd "${PROJECT_DIR}"
+. ${SCRIPT_DIR}/inc/all.sh
 
-# Print commands and their arguments as they are executed.
-set -x
+cd_project_root
 
-docker-compose exec -T php composer $*
+container_must_be_up 0
 
-cd - &>/dev/null
+(set -x;docker-compose exec -T php composer $*)
