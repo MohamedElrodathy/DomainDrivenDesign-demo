@@ -6,7 +6,9 @@ namespace Product\Domain;
 
 use DateTimeImmutable;
 use DomainDrivenDesign\AggregateRootInterface;
+use DomainDrivenDesign\Event\EventInterface;
 use Product\Domain\AddPrice\AddPriceCommand;
+use Product\Domain\AddPrice\PriceAddedEvent;
 use Product\Domain\Exception\OnlyOwnerMayAddPriceException;
 use Product\Domain\Exception\PriceAvailabilityException;
 
@@ -20,6 +22,8 @@ final class Product implements AggregateRootInterface
     private $owner;
     /** @var Price[] */
     private $prices = [];
+    /** @var EventInterface[] */
+    private $events = [];
 
     public function addPrice(AddPriceCommand $command): void
     {
@@ -43,7 +47,24 @@ final class Product implements AggregateRootInterface
             }
         }
 
-        $this->prices[] = new Price($command->getAmount(), $command->getAvailableFrom(), $command->getAvailableUntil());
+        $event = new PriceAddedEvent(
+            $this->id,
+            $command->getAmount(),
+            $command->getAvailableFrom(),
+            $command->getAvailableUntil()
+        );
+        $this->events[] = $event;
+
+        $this->applyPriceAdded($event);
+    }
+
+    /** @return EventInterface[] */
+    public function pullDomainEvents(): array
+    {
+        $events = $this->events;
+        $this->events = [];
+
+        return $events;
     }
 
     public function getPriceForGivenDate(DateTimeImmutable $date): ?Price
@@ -70,5 +91,14 @@ final class Product implements AggregateRootInterface
     public function getOwner(): Seller
     {
         return $this->owner;
+    }
+
+    private function applyPriceAdded(PriceAddedEvent $event): void
+    {
+        $this->prices[] = new Price(
+            $event->getAmount(),
+            $event->getAvailableFrom(),
+            $event->getAvailableUntil()
+        );
     }
 }
