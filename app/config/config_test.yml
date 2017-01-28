@@ -1,6 +1,10 @@
 imports:
     - { resource: config_dev.yml }
 
+services:
+    product_infrastructure.repository:
+        alias: product_infrastructure.repository.in_memory
+
 framework:
     test: ~
     session:

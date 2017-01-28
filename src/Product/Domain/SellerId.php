@@ -17,6 +17,14 @@ final class SellerId implements ValueObjectInterface
         $this->value = Uuid::uuid4();
     }
 
+    public static function fromString(string $productId): SellerId
+    {
+        $self = new self();
+        $self->value = Uuid::fromString($productId);
+
+        return $self;
+    }
+
     public function isEqualTo($object): bool
     {
         if (!$object instanceof self) {

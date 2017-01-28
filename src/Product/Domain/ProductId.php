@@ -6,15 +6,24 @@ namespace Product\Domain;
 
 use DomainDrivenDesign\ValueObjectInterface;
 use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 
 final class ProductId implements ValueObjectInterface
 {
-    /** @var \Ramsey\Uuid\UuidInterface */
+    /** @var UuidInterface */
     private $value;
 
     public function __construct()
     {
         $this->value = Uuid::uuid4();
+    }
+
+    public static function fromString(string $productId): ProductId
+    {
+        $self = new self();
+        $self->value = Uuid::fromString($productId);
+
+        return $self;
     }
 
     public function isEqualTo($object): bool
@@ -24,5 +33,10 @@ final class ProductId implements ValueObjectInterface
         }
 
         return $object->value === $this->value;
+    }
+
+    public function getValue(): UuidInterface
+    {
+        return $this->value;
     }
 }

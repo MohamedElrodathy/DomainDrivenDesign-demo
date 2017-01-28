@@ -1,0 +1,6 @@
+services:
+    command_bus:
+        class: DomainDrivenDesign\Command\CommandBus
+        calls:
+            # it's better to use service tags but it requires much more code
+            - [register, ['Product\Domain\AddPrice\AddPriceCommand', '@product_domain.add_price.command_handler']]
