@@ -5,17 +5,24 @@ declare(strict_types=1);
 namespace Product\Domain\AddPrice;
 
 use DomainDrivenDesign\Command\CommandHandlerInterface;
+use DomainDrivenDesign\Event\EventDispatcherInterface;
 use Product\Domain\Exception\ProductNotFoundException;
 use Product\Domain\Repository\ProductRepositoryInterface;
 
 /*final */class AddPriceCommandHandler implements CommandHandlerInterface
 {
+    /** @var EventDispatcherInterface */
+    private $eventDispatcher;
     /** @var ProductRepositoryInterface */
     private $productRepository;
 
-    public function __construct(ProductRepositoryInterface $productRepository)
-    {
+    public function __construct(
+        ProductRepositoryInterface $productRepository,
+        EventDispatcherInterface $eventDispatcher = null
+    ) {
         $this->productRepository = $productRepository;
+        $this->eventDispatcher = $eventDispatcher;
+        dump("I am instanciated");
     }
 
     public function __invoke(AddPriceCommand $command): void
@@ -28,5 +35,10 @@ use Product\Domain\Repository\ProductRepositoryInterface;
         $product->addPrice($command);
 
         $this->productRepository->save($product);
+
+        $events = $product->pullDomainEvents();
+        foreach ($events as $event) {
+            $this->eventDispatcher->dispatch($event);
+        }
     }
 }
