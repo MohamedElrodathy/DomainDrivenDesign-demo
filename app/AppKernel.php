@@ -17,6 +17,9 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
 
+            // Third party bundles
+            new Snc\RedisBundle\SncRedisBundle(),
+
             // App specific
             new Product\AppBundle\ProductAppBundle(),
             new Checkout\AppBundle\CheckoutAppBundle(),

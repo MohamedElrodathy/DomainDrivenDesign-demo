@@ -9,7 +9,8 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 cd_project_root
 
-[ ! -f .env ] && (set -x; cp .env.dist .env)
+dotenv_manage
+
 container_up 1
 
 ${SCRIPT_DIR}/composer install

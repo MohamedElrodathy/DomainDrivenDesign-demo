@@ -2,6 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
+    - { resource: services/snc_redis.yml }
     - { resource: "@ProductAppBundle/Resources/config/services.yml" }
     - { resource: "@CheckoutAppBundle/Resources/config/services.yml" }
 
@@ -28,8 +29,7 @@ framework:
     trusted_proxies: ~
     session:
         # http://symfony.com/doc/current/reference/configuration/framework.html#handler-id
-        handler_id:  session.handler.native_file
-        save_path:   "%kernel.root_dir%/../var/sessions/%kernel.environment%"
+        handler_id:  snc_redis.session.handler
     fragments:       ~
     http_method_override: true
     assets: ~

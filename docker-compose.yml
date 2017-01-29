@@ -19,8 +19,10 @@ services:
             - 9000
         depends_on:
             - db
+            - redis
         links:
             - db
+            - redis
         volumes:
             - "./:/var/www/myapp"
             - "./var/logs:/var/www/myapp/var/logs"
@@ -36,3 +38,10 @@ services:
             - php
         volumes:
             - "./var/logs/nginx/:/var/log/nginx"
+
+    redis:
+        build: ./provisionning/redis
+        ports:
+            - 6379
+        volumes:
+            - "./var/data/redis:/data"

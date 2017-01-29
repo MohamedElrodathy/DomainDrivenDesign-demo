@@ -1,0 +1,13 @@
+snc_redis:
+    clients:
+        default:
+            type: phpredis
+            alias: default
+            dsn: redis://%env(REDIS_HOST)%
+        session:
+            type: phpredis
+            alias: session
+            dsn: redis://%env(REDIS_HOST)%
+    session:
+        client: session
+        prefix: ddd_demo_session

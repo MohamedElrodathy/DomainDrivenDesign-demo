@@ -25,6 +25,16 @@ RUN curl -sS -o /tmp/icu.tar.gz -L http://download.icu-project.org/files/icu4c/5
 # Type docker-php-ext-install to see available extensions
 RUN docker-php-ext-install bcmath hash intl json mbstring opcache pcntl pdo pdo_mysql
 
+# Install phpredis
+RUN curl -sS -o /tmp/phpredis.tar.gz -L https://github.com/phpredis/phpredis/archive/3.0.0.tar.gz \
+    && tar -zxf /tmp/phpredis.tar.gz -C /tmp \
+    && cd /tmp/phpredis-3.0.0 \
+    && phpize \
+    && ./configure \
+    && make \
+    && make install \
+    && echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini
+
 ADD php.ini /usr/local/etc/php/
 RUN echo 'alias sf="php bin/console"' >> ~/.bashrc
 

@@ -21,6 +21,7 @@
         "php": ">=7.1",
         "ext-pdo": "*",
         "ext-pdo_mysql": "*",
+        "ext-redis": "*",
 
         "symfony/symfony": "3.2.*",
         "doctrine/orm": "^2.5",
@@ -36,7 +37,8 @@
         "moneyphp/money": "^3.0",
         "ramsey/uuid": "^3.5",
         "roave/security-advisories": "dev-master",
-        "symfony/dotenv": "dev-master"
+        "symfony/dotenv": "dev-master",
+        "snc/redis-bundle": "^2.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
