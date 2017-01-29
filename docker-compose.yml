@@ -6,7 +6,7 @@ services:
         ports:
             - 3306
         volumes:
-            - "./var/mysqldata:/var/lib/mysql"
+            - "./var/data/mysql:/var/lib/mysql"
         environment:
             MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
             MYSQL_DATABASE: ${DATABASE_NAME}
