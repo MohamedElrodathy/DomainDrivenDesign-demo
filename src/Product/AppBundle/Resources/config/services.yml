@@ -1,6 +1,7 @@
 services:
     product_domain.add_price.command_handler:
         class: Product\Domain\AddPrice\AddPriceCommandHandler
+        lazy:  true
         arguments:
             - '@product_infrastructure.repository'
 

@@ -35,10 +35,11 @@
         "incenteev/composer-parameter-handler": "^2.0",
 
         "moneyphp/money": "^3.0",
+        "ocramius/proxy-manager": "^2.1",
         "ramsey/uuid": "^3.5",
         "roave/security-advisories": "dev-master",
-        "symfony/dotenv": "dev-master",
-        "snc/redis-bundle": "^2.0"
+        "snc/redis-bundle": "^2.0",
+        "symfony/dotenv": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

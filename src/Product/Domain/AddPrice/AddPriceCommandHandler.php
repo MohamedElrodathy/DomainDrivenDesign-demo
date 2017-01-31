@@ -8,7 +8,7 @@ use DomainDrivenDesign\Command\CommandHandlerInterface;
 use Product\Domain\Exception\ProductNotFoundException;
 use Product\Domain\Repository\ProductRepositoryInterface;
 
-final class AddPriceCommandHandler implements CommandHandlerInterface
+/*final */class AddPriceCommandHandler implements CommandHandlerInterface
 {
     /** @var ProductRepositoryInterface */
     private $productRepository;
